@@ -10,5 +10,5 @@ import Foundation
 
 protocol UserDetailDataManager : class {
     func fetchDetail(username: String, completion: @escaping (Result<UserDetailResponse, Error>) -> ())
-    
+    func updateName(username: String, name: String, completion: @escaping (Result<Void, Error>) -> ())
 }

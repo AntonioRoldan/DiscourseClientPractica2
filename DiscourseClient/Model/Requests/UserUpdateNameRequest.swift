@@ -1,24 +1,27 @@
 //
-//  UserDetailRequest.swift
+//  UserUpdateNameRequest.swift
 //  DiscourseClient
 //
-//  Created by Antonio Miguel Roldan de la Rosa on 26/03/2020.
+//  Created by Antonio Miguel Roldan de la Rosa on 06/04/2020.
 //  Copyright © 2020 Roberto Garrido. All rights reserved.
 //
 
 import Foundation
 
-struct UserDetailRequest : APIRequest {
+class UserUpdateNameRequest : APIRequest {
     
-    typealias Response = UserDetailResponse
+    typealias Response = UserUpdateNameResponse
+    
     let username : String
-    
-    init(_ username: String) {
+    let name : String
+       
+    init(_ username: String, _ name: String) {
         self.username = username
+        self.name = name
     }
-    
+       
     var method: Method {
-        .GET
+        .PUT
     }
     
     var path: String {
@@ -30,12 +33,11 @@ struct UserDetailRequest : APIRequest {
     }
     
     var body: [String : Any] {
-        return [:]
+        return ["name": self.name]
     }
     
     var headers: [String : String] {
         return [:]
     }
-    
     
 }

@@ -1,5 +1,5 @@
 //
-//  DeleteTopicResponse.swift
+//  UserUpdateNameResponse.swift
 //  DiscourseClient
 //
 //  Created by Antonio Miguel Roldan de la Rosa on 06/04/2020.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-class DeleteTopicResponse : Codable {
+class UserUpdateNameResponse : Codable {
     
 }
