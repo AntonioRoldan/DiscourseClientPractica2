@@ -11,18 +11,22 @@ import Foundation
 struct UserDetailRequest : APIRequest {
     
     typealias Response = UserDetailResponse
+    let username : String
+    
+    init(_ username: String) {
+        self.username = username
+    }
     
     var method: Method {
         .GET
     }
     
     var path: String {
-        return "/directory_items.json"
+        return "/users/\(username).json"
     }
     
     var parameters: [String : String] {
-        return ["period": "weekly",
-                "order": "topic_count"]
+        return [:]
     }
     
     var body: [String : Any] {

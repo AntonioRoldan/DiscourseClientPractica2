@@ -7,3 +7,22 @@
 //
 
 import Foundation
+
+protocol UserDetailCoordinatorDelegate : class {
+    
+}
+
+protocol UserDetailViewDelegate : class {
+    
+}
+
+class UserDetailViewModel {
+    weak var coordinatorDelegate : UserDetailCoordinatorDelegate?
+    weak var viewDelegate : UserDetailViewDelegate?
+    let username : String
+    let dataManager: UserDetailDataManager
+    init(username: String, userDetailDataManager: UserDetailDataManager) {
+           self.username = username
+           self.dataManager = userDetailDataManager
+    }
+}

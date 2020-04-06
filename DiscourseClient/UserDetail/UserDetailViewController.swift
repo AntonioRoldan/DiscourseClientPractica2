@@ -32,4 +32,5 @@ class UserDetailViewController : UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
+    
 }
