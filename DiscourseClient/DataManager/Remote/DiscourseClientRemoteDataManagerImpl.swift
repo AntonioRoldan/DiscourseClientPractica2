@@ -57,4 +57,11 @@ class DiscourseClientRemoteDataManagerImpl: DiscourseClientRemoteDataManager {
             completion(result)
         }
     }
+    
+    func updateName(username: String, name: String, completion: @escaping (Result<Void, Error>) -> ()) {
+        let request = UserUpdateNameRequest(username, name)
+        session.sendWithNoJsonResponse(request: request) { result in
+            completion(result)
+        }
+    }
 }

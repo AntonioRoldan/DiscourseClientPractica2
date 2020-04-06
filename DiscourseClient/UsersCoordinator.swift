@@ -12,10 +12,10 @@ class UsersCoordinator : Coordinator {
     //TODO: Create UserDetailViewModel along with its data manager and view controller 
     let presenter: UINavigationController
     let usersDataManager: UsersDataManager
-    let userDetailDataManager: UsersDataManager
+    let userDetailDataManager: UserDetailDataManager
 
     init(presenter: UINavigationController, usersDataManager: UsersDataManager,
-         userDetailDataManager: UsersDataManager) {
+         userDetailDataManager: UserDetailDataManager) {
         self.presenter = presenter
         self.usersDataManager = usersDataManager
         self.userDetailDataManager = userDetailDataManager
@@ -34,6 +34,14 @@ class UsersCoordinator : Coordinator {
 
 extension UsersCoordinator : UsersCoordinatorDelegate {
     func didSelect(user: User) {
-        
+        let userDetailViewModel = UserDetailViewModel(username: user.userName, userDetailDataManager: self.userDetailDataManager)
+        let userDetailViewController = UserDetailViewController(viewModel: userDetailViewModel)
+        userDetailViewModel.viewDelegate = userDetailViewController
+        userDetailViewModel.coordinatorDelegate = self
+        presenter.pushViewController(userDetailViewController, animated: true)
     }
+}
+
+extension UsersCoordinator : UserDetailCoordinatorDelegate {
+    
 }
