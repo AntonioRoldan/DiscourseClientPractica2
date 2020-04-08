@@ -10,6 +10,16 @@ import UIKit
 
 /// ViewController para representar el listado de categorías
 class CategoriesViewController: UIViewController {
+    lazy var tableView: UITableView = {
+        let table = UITableView(frame: .zero, style: .grouped)
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.dataSource = self
+        table.register(UINib(nibName: "CategoryCell", bundle: nil), forCellReuseIdentifier: "CategoryCell")
+        table.estimatedRowHeight = 100
+        table.rowHeight = UITableView.automaticDimension
+        return table
+    }()
+    
     let viewModel: CategoriesViewModel
 
     init(viewModel: CategoriesViewModel) {
@@ -22,17 +32,55 @@ class CategoriesViewController: UIViewController {
     }
 
     override func loadView() {
+
         view = UIView()
-        view.backgroundColor = .white
 
-        let testLabel = UILabel()
-        testLabel.translatesAutoresizingMaskIntoConstraints = false
-        testLabel.text = "Get a list of categories"
-
-        view.addSubview(testLabel)
+        view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            testLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            testLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.viewWasLoaded()
+    }
+    
+    func showAlert(_ message: String){
+        showAlert(message, "Error fetching data")
+    }
+    
+}
+
+extension CategoriesViewController : UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections()
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRows(in: section)
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as? CategoryCell,
+            let cellViewModel = viewModel.viewModel(at: indexPath) {
+            print(cellViewModel)
+            cell.viewModel = cellViewModel
+            return cell
+        }
+        fatalError()
+    }
+}
+
+extension CategoriesViewController : CategoriesViewDelegate {
+    func categoriesFetched() {
+        tableView.reloadData()
+    }
+    func errorFetchingCategories(message: String) {
+        showAlert(message)
     }
 }

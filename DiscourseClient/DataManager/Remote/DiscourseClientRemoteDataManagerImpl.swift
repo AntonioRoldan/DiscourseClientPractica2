@@ -64,4 +64,10 @@ class DiscourseClientRemoteDataManagerImpl: DiscourseClientRemoteDataManager {
             completion(result)
         }
     }
+    func fetchCategories(completion: @escaping (Result<CategoriesResponse, Error>) -> ()) {
+        let request = CategoriesRequest()
+        session.send(request: request) { result in
+            completion(result)
+        }
+    }
 }

@@ -59,3 +59,9 @@ extension DiscourseClientDataManager : UserDetailDataManager {
         remoteDataManager.updateName(username: username, name: name, completion: completion)
     }
 }
+
+extension DiscourseClientDataManager : CategoriesDataManager {
+    func fetchCategories(completion: @escaping (Result<CategoriesResponse, Error>) -> ()) {
+        remoteDataManager.fetchCategories(completion: completion)
+    }
+}
