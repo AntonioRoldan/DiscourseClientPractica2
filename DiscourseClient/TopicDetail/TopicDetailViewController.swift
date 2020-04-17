@@ -154,6 +154,14 @@ extension TopicDetailViewController: TopicDetailViewDelegate {
     func topicDetailFetched() {
         updateUI()
     }
+
+    /*
+     Te comento lo mismo que te decía en el módulo de UserDetail,
+     Aquí podríamos haber utilizado el mismo método topicDetailFetched para actualizar toda la UI, no había necesidad de crear otro método delegate.
+     De esta manera, el viewModel tendría una propiedad más, deleteButtonIsHidden, que cambiarías desde el ViewModel
+     justo antes de llamar a topicDetailFetched, y que consultarías desde el ViewController una vez el delegate es llamado.
+     Ojo, no digo que esté mal, pero quedaría un cógido más consistente.
+     */
     
     func topicCanBeDeleted(){
         deleteButton.isHidden = false

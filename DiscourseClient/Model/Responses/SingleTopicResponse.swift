@@ -16,6 +16,9 @@ struct SingleTopicResponse: Codable {
     }
 }
 
+/*
+ Cuidado co el snake case de aquí, habría que haberlo pasado a CamelCase
+ */
 struct Detail : Codable {
     let can_delete: Bool?
 }

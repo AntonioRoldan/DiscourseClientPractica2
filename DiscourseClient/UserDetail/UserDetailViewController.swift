@@ -143,6 +143,12 @@ class UserDetailViewController : UIViewController {
 }
 
 extension UserDetailViewController : UserDetailViewDelegate {
+    /*
+     Aquí podríamos haber utilizado el mismo método userFetched para actualizar toda la UI, no había necesidad de crear otro método delegate.
+     De esta manera, el viewModel tendría dos propiedades editNameButtonIsHidden y userEditNameFieldIsHidden, que cambiarías desde el ViewModel
+     justo antes de llamar a userFetched, y que consultarías desde el ViewController una vez el delegate es llamado.
+     Ojo, no digo que esté mal, pero quedaría un cógido más consistente.
+     */
     func canEditName() {
         editNameButton.isHidden = false
         userEditNameField.isHidden = false
